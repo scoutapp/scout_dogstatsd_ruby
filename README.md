@@ -1,24 +1,34 @@
 # ScoutDogstatsd
 
-Want your Rails performance KPIs in your DogStatsD-compatible metric system with _almost_ zero effort? Of course you do! Meet `scout_dogstatsd`! This gem is an extension of the [Scout](https://scoutapp.com) Ruby monitoring agent, sending the following metrics w/o any custom instrumentation steps:
+Want your Rails performance KPIs in your DogStatsD-compatible metric system with _almost_ zero effort? Of course you do! Meet `scout_dogstatsd`! This gem is an extension of the [Scout](https://scoutapp.com) Ruby monitoring agent, and makes it easy to create an app performance dashboard:
 
-* web.duration_ms (histogram) - The total duration of web requests in milliseconds
-* job.duration_ms (histogram) - The total duration of background jobs (Sidekiq, DelayedJob, etc.) in milliseconds
-* web.error_count (counter) - A count of web requests that throw an exception
-* job.error_count (counter) - A count of background jobs that throw an exception
-* web.queue_time_ms (gauge) - The [time spent in request queuing](http://help.apm.scoutapp.com/#request-queuing) in milliseconds
-* job.queue_time_ms (gauge) - The time between when a job is inserted into a background job queue and when execution begins in milliseconds
-
-These metrics are tagged too! Slice and dice! The following tags are added to each metric:
-
-* app - The name of the app. See the [name](http://help.apm.scoutapp.com/#name) Scout config option.
-* hostname - The hostname of the app. See the [hostname](http://help.apm.scoutapp.com/#hostname) Scout config option.
+![screen](https://s3-us-west-1.amazonaws.com/scout-blog/scout_dogstatsd/datadog_screen.png)
 
 A [Scout](https://scoutapp.com) account isn't required, but it certainly makes getting to the source of app performance easier 😉.
 
-Now, you can correlate app performance metrics to all of your other system metrics.
+## Metrics 
 
-![screen](https://s3-us-west-1.amazonaws.com/scout-blog/scout_dogstatsd/datadog_screen.png)
+The following metrics are reported w/o any custom instrumentation steps:
+
+| Metric Name | Type | Description |
+| - | - | - |
+web.duration_ms | histogram | The total duration of web requests in milliseconds
+job.duration_ms | histogram | The total duration of background jobs (Sidekiq, DelayedJob, etc.) in milliseconds
+web.error_count | counter | A count of web requests that throw an exception
+job.error_count | counter | A count of background jobs that throw an exception
+web.queue_time_ms | gauge | The [time spent in request queuing](http://help.apm.scoutapp.com/#request-queuing) in milliseconds
+job.queue_time_ms | gauge | The time between when a job is inserted into a background job queue and when execution begins in milliseconds
+
+## Tags
+
+These metrics are tagged too! Slice and dice! The following tags are added to each metric:
+
+| Tag Name | Description |
+| - | - |
+app | The name of the app. See the [name](http://help.apm.scoutapp.com/#name) Scout config option.
+hostname | The hostname of the app. See the [hostname](http://help.apm.scoutapp.com/#hostname) Scout config option.
+
+Now, you can correlate app performance metrics with all of your other system metrics.
 
 ## Monitoring Platforms that Support the DogStatsD Protocol
 
@@ -53,6 +63,8 @@ ScoutDogstatsd.configure(statsd)
 ```
 
 ### 2. Add a `config/scout_apm.yml` file to your Rails app:
+
+__This step isn't required if you are already using Scout.__
 
 ```yaml
 common: &defaults
