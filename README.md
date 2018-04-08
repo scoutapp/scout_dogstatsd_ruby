@@ -54,7 +54,7 @@ Or install it yourself as:
 
 ## Configuration
 
-### 1. Add a `config/initializers/scout_dogstatsd.rb` file to your Rails app:
+__1. Add a `config/initializers/scout_dogstatsd.rb` file to your Rails app:__
 
 ```ruby
 require 'datadog/statsd'
@@ -62,9 +62,9 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 ScoutDogstatsd.configure(statsd)
 ```
 
-### 2. Add a `config/scout_apm.yml` file to your Rails app:
+__2. Add a `config/scout_apm.yml` file to your Rails app:__
 
-__This step isn't required if you are already using Scout.__
+_This step isn't required if you are already using Scout._
 
 ```yaml
 common: &defaults
@@ -78,7 +78,7 @@ production:
   <<: *defaults
 ```
 
-__Metrics are only sent if `monitor: true` for the associated Rails environment.__
+_Metrics are only sent if `monitor: true` for the associated Rails environment._
 
 [See the Scout docs](http://help.apm.scoutapp.com/#ruby-agent) for advanced configuration instructions.
 
