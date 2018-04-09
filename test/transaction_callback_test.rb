@@ -2,8 +2,8 @@ require_relative 'test_helper'
 
 class TransactionCallbackTest < Minitest::Test
   def setup
-    # This would report real StatsD metrics if th port was configured ... figure out a better way to no-op this.
-    statsd = Datadog::Statsd.new('localhost', non_default_port = 9126)
+    statsd = Datadog::Statsd.new('localhost')
+    statsd.socket = FakeUDPSocket.new
     ScoutDogstatsd.configure(statsd)
   end
 

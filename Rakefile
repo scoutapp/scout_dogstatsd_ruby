@@ -1,2 +1,10 @@
 require "bundler/gem_tasks"
-task :default => :spec
+
+task :test do
+  $: << File.expand_path(File.dirname(__FILE__) + "/test")
+  Dir.glob('./test/*_test.rb').each { |file| require file }
+end
+
+desc "Run tests"
+task :default => :test
+
