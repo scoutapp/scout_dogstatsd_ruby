@@ -8,8 +8,8 @@ class TransactionCallbackTest < Minitest::Test
   end
 
   def test_call
-    callback = ScoutDogstatsd::TransactionCallback.new(converter_results,context,scope_layer)
-    callback.call # would be great to validate the actual statsd metrics that are reported
+    callback = ScoutDogstatsd::TransactionCallback.new
+    callback.call(payload) # would be great to validate the actual statsd metrics that are reported
   end
 
   private
@@ -34,5 +34,9 @@ class TransactionCallbackTest < Minitest::Test
      :queue_time=>nil, 
      :job=>nil
     }
+  end
+
+  def payload
+    ScoutApm::Extensions::TransactionCallbackPayload.new(converter_results,context,scope_layer)
   end
 end

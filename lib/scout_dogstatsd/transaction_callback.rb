@@ -1,15 +1,16 @@
 module ScoutDogstatsd
-  class TransactionCallback < ScoutApm::Extensions::TransactionCallbackBase
-    def call
+  class TransactionCallback
+    def call(payload)
+      @payload = payload
       ScoutDogstatsd.client.batch do |s|
-        s.histogram("#{transaction_type_slug}.duration_ms", duration_ms, :tags => tags)
+        s.histogram("#{payload.transaction_type_slug}.duration_ms", payload.duration_ms, :tags => tags)
 
-        if queue_time_ms
-          s.gauge("#{transaction_type_slug}.queue_time_ms", queue_time_ms, :tags => tags)
+        if payload.queue_time_ms
+          s.gauge("#{payload.transaction_type_slug}.queue_time_ms", payload.queue_time_ms, :tags => tags)
         end
 
-        if error?
-          s.increment("#{transaction_type_slug}.error_count", :tags => tags)
+        if payload.error?
+          s.increment("#{payload.transaction_type_slug}.error_count", :tags => tags)
         end
       end
     end
@@ -18,17 +19,10 @@ module ScoutDogstatsd
 
     def tags
       [
-        "hostname:#{hostname}",
-        "app:#{app_name}",
+        "hostname:#{@payload.hostname}",
+        "app:#{@payload.app_name}",
       ]
     end
 
-    # Renames Scout metric names to a more StatsD-ish format. 
-    # Ex: Controllers/users/index => users.index
-    def transaction_name
-      transaction_name
-        .sub!(/\A\w+\//,'') # remove the type (Controller, Job)
-        .gsub("/",".")    
-    end
   end
 end
