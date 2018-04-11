@@ -1,5 +1,7 @@
 # ScoutDogstatsd
 
+![travis](https://travis-ci.org/scoutapp/scout_dogstatsd_ruby.svg?branch=master)
+
 Want your Rails performance KPIs in your DogStatsD-compatible metric system with _almost_ zero effort? Of course you do! Meet `scout_dogstatsd`! This gem is an extension of the [Scout](https://scoutapp.com) Ruby monitoring agent ([`scout_apm`](https://github.com/scoutapp/scout_apm_ruby)), and makes it easy to create an app performance dashboard:
 
 ![screen](https://s3-us-west-1.amazonaws.com/scout-blog/scout_dogstatsd/datadog_screen.png)
