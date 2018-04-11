@@ -31,6 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "mocha"
 
-  spec.add_runtime_dependency "scout_apm", "~> 2.4.10.pre"
+  spec.add_runtime_dependency "scout_apm", "~> 2.4.11.pre"
   spec.add_runtime_dependency "dogstatsd-ruby"
 end
