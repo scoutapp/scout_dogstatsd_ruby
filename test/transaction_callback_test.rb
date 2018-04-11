@@ -5,6 +5,8 @@ class TransactionCallbackTest < Minitest::Test
     statsd = Datadog::Statsd.new('localhost')
     statsd.socket = FakeUDPSocket.new
     ScoutDogstatsd.configure(statsd)
+    @agent_context = ScoutApm::AgentContext.new
+    @context = ScoutApm::Context.new(@agent_context)
   end
 
   def test_call
@@ -13,10 +15,6 @@ class TransactionCallbackTest < Minitest::Test
   end
 
   private
-
-  def context
-    ScoutApm::Context.new(ScoutApm::AgentContext.new)
-  end
 
   def scope_layer
     scope_layer = ScoutApm::Layer.new('Controller', 'users/index', Time.now - 0.1)
@@ -37,6 +35,6 @@ class TransactionCallbackTest < Minitest::Test
   end
 
   def payload
-    ScoutApm::Extensions::TransactionCallbackPayload.new(converter_results,context,scope_layer)
+    ScoutApm::Extensions::TransactionCallbackPayload.new(@agent_context,converter_results,@context,scope_layer)
   end
 end
