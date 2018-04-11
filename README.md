@@ -84,7 +84,7 @@ _Metrics are only sent if `monitor: true` for the associated Rails environment._
 
 ## How it works
 
-After each transaction (a web request or background job), the metrics specific to that transaction are transmitted via the DogStatsD protocol via the client passed through to `ScoutDogstatsd#configure`. The `scout_apm` gem automatically instruments Rails controller-actions, so no code changes are required. Easy peasy!
+After each transaction (a web request or background job), the metrics specific to that transaction are transmitted via the DogStatsD protocol via the client passed through to `ScoutDogstatsd#configure`. No code changes are required: the `scout_apm` gem automatically instruments Rails controller-actions and background jobs. Easy peasy!
 
 ## Contributing
 
