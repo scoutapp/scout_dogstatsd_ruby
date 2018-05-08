@@ -8,6 +8,8 @@ Want your Rails performance KPIs in your DogStatsD-compatible metric system with
 
 A [Scout](https://scoutapp.com) account isn't required, but it certainly makes getting to the source of app performance easier 😉.
 
+_Using plain-vanilla StatsD? Checkout [scout_statsd_ruby](https://github.com/scoutapp/scout_statsd_ruby)._
+
 ## Metrics 
 
 The following metrics are reported w/o any custom instrumentation steps:
