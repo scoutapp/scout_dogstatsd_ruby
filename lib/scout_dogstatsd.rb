@@ -1,3 +1,5 @@
+require 'scout_apm'
+
 module ScoutDogstatsd
   # All access to the agent is thru this class method to ensure multiple Agent instances are not initialized per-Ruby process.
   def self.configure(dogstatsd_client)
